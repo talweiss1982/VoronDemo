@@ -18,10 +18,7 @@ namespace VoronDemo
             var options = new VoronDemoCommandLineOptions();
             if (Parser.Default.ParseArguments(args, options) == false)
             {
-                var autoBuild = HelpText.AutoBuild(options);
-                HelpText.DefaultParsingErrorsHandler(options, autoBuild);
-                Console.WriteLine(autoBuild.ToString());
-                return;
+                options.DataPath = AppDomain.CurrentDomain.BaseDirectory;
             }
             var vdso = StorageEnvironmentOptions.ForPath(Path.Combine(options.DataPath, "VoronDemo"));
             using (var voronDemo = new VoronDemo(vdso))
