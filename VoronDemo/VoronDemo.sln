@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoronDemo", "VoronDemo\VoronDemo.csproj", "{78D21951-10A4-4636-8DE9-D6A13950A162}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Voron", "Voron", "{015DDBE8-141D-4344-9CD9-3284160B8706}"
+	ProjectSection(SolutionItems) = preProject
+		Voron\Sparrow.dll = Voron\Sparrow.dll
+		Voron\Sparrow.pdb = Voron\Sparrow.pdb
+		Voron\Voron.dll = Voron\Voron.dll
+		Voron\Voron.pdb = Voron\Voron.pdb
+		Voron\Voron.pdb.srcsrv = Voron\Voron.pdb.srcsrv
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{78D21951-10A4-4636-8DE9-D6A13950A162}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78D21951-10A4-4636-8DE9-D6A13950A162}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78D21951-10A4-4636-8DE9-D6A13950A162}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78D21951-10A4-4636-8DE9-D6A13950A162}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
