@@ -48,32 +48,30 @@ namespace VoronDemo
                 using (var it = lastLoginIndex.Iterate())
                 {
                     //We could not find a value that is bigger than the 'from' time  
-                    if(it.Seek(new Slice(EndianBitConverter.Big.GetBytes(from.Ticks))) == false)
+                    if (it.Seek(new Slice(EndianBitConverter.Big.GetBytes(from.Ticks))) == false)
                         yield break;
-                    var currKeyAsSlice = it.CurrentKey;
-                    var currKey = currKeyAsSlice.CreateReader().ReadBigEndianInt64();
+                    var currKey = it.CurrentKey.CreateReader().ReadBigEndianInt64();
                     //the next key after 'from' is bigger than the 'to' range, nothing to return
-                    if (currKey> to.Ticks)
+                    if (currKey > to.Ticks)
                         yield break;
                     int found = 0;
                     do
                     {
-                        using (var iterator = lastLoginIndex.MultiRead(currKeyAsSlice))
+                        using (var iterator = lastLoginIndex.MultiRead(it.CurrentKey))
                         {
                             iterator.Seek(Slice.BeforeAllKeys);
                             do
                             {
-                                if(found++ >= limit)
+                                if (found++ >= limit)
                                     break;
                                 yield return iterator.CurrentKey.CreateReader().ToStringValue();
                             } while (iterator.MoveNext());
                         }
                         //no more keys
-                        if(it.MoveNext() == false)
+                        if (it.MoveNext() == false)
                             yield break;
                         currKey = it.CurrentKey.CreateReader().ReadBigEndianInt64();
-                        currKeyAsSlice = it.CurrentKey;
-                    } while (currKey <= to.Ticks && found < limit);
+                    } while (currKey <= to.Ticks);
                 }
             }
         }
@@ -87,7 +85,7 @@ namespace VoronDemo
                 users.Add(userId, time.ToString("o") + "|" + successful);
                 var lastLoginIndex = _storageEnvironment.CreateTree(tx, "IX_UsersByLastLogin");
 
-                lastLoginIndex.MultiAdd(new Slice(EndianBitConverter.Big.GetBytes(time.Ticks)), 
+                lastLoginIndex.MultiAdd(new Slice(EndianBitConverter.Big.GetBytes(time.Ticks)),
                     userId);
 
                 tx.Commit();
